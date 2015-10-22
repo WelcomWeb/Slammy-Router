@@ -1,6 +1,6 @@
 # Slammy-Router
 
-[![Build Status](https://travis-ci.org/WelcomWeb/slammy-router.svg?branch=master)](https://travis-ci.org/WelcomWeb/slammy-router)
+[![Build Status](https://travis-ci.org/WelcomWeb/Slammy-Router.svg?branch=master)](https://travis-ci.org/WelcomWeb/Slammy-Router)
 
 Slammy-Router is a tiny React router implementation, usable for single page apps. It only uses hashbangs, no pushState.
 
