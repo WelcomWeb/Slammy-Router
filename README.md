@@ -45,7 +45,7 @@ Slammy-Router is a tiny React router implementation, usable for single page apps
 			
 			return (
 				<div>
-					<p>Route with param "greeting" for {this.props.params.greeting}</p>
+					<p>Route with param "greeting": {this.props.params.greeting}</p>
 				</div>
 			);
 			
