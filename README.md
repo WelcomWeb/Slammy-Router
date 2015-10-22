@@ -12,7 +12,7 @@ Slammy-Router is a tiny React router implementation, usable for single page apps
 
 	import React from 'react';
 	import ReactDOM from 'react-dom';
-	import Router from '../../src/slammy-router';
+	import Router from 'slammy-router';
 	
 	class DefaultRoute extends React.Component {
 		render() {
@@ -75,3 +75,11 @@ Slammy-Router is a tiny React router implementation, usable for single page apps
 ## Demo
 
 You can clone this repository, and build (`npm run build`) from the `example` directory. Point your web browser to the index file of that same directory to try Slammy-Router.
+
+## Building this repo
+
+    $ npm install && gulp
+
+## Building the example
+
+	$ cd example/ && npm install && npm run build
