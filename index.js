@@ -1,1 +1,1 @@
-module.exports = require('dist/slammy-router');
+module.exports = require('./dist/slammy-router');

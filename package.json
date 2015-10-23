@@ -1,6 +1,6 @@
 {
   "name": "slammy-router",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A tiny router implementation for React",
   "main": "index.js",
   "scripts": {
