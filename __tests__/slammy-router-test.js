@@ -88,4 +88,79 @@ describe('Slammy-Router', function () {
 		var view = TestUtils.findRenderedDOMComponentWithTag(reference, 'div');
 		expect(view.textContent).toEqual("notfound");
 	});
+	
+	it('notify listeners on route change', function () {
+		var TestUtils = require('react-addons-test-utils'),
+			React = require('react'),
+			ReactDOM = require('react-dom'),
+			Router = require('../src/slammy-router');
+		
+		var routes = {
+			"/default": React.createClass({
+					render: function () {
+						return <div>default</div>;
+					}
+				}),
+			"/test-route": React.createClass({
+					render: function () {
+						return <div>test-route</div>;
+					}
+				})
+		};
+		
+		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var view;
+		
+		var mock = {
+			"callback": function () {}
+		};
+		spyOn(mock, "callback");
+		
+		reference.addRouteChangeListener(mock.callback);
+		
+		reference.setRoute("/default");
+		view = TestUtils.findRenderedDOMComponentWithTag(reference, 'div');
+		expect(view.textContent).toEqual("default");
+		
+		reference.setRoute("/test-route");
+		expect(mock.callback).toHaveBeenCalled()
+	});
+	
+	if('doesnt notify detached listeners', function () {
+		var TestUtils = require('react-addons-test-utils'),
+			React = require('react'),
+			ReactDOM = require('react-dom'),
+			Router = require('../src/slammy-router');
+		
+		var routes = {
+			"/default": React.createClass({
+					render: function () {
+						return <div>default</div>;
+					}
+				}),
+			"/test-route": React.createClass({
+					render: function () {
+						return <div>test-route</div>;
+					}
+				})
+		};
+		
+		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var view;
+		
+		var mock = {
+			"callback": function () {}
+		};
+		spyOn(mock, "callback");
+		
+		reference.addRouteChangeListener(mock.callback);
+		reference.removeRouteChangeListener(mock.callback);
+		
+		reference.setRoute("/default");
+		view = TestUtils.findRenderedDOMComponentWithTag(reference, 'div');
+		expect(view.textContent).toEqual("default");
+		
+		reference.setRoute("/test-route");
+		expect(mock.callback).not.toHaveBeenCalled()
+	});
 });

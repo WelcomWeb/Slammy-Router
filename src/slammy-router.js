@@ -43,6 +43,13 @@ let getRouteFromTable = function (hash, routes, notfound) {
 	return React.createElement(notfound, { route: hash });
 };
 
+let _listeners = [],
+	notifyListeners = function (listeners, hash) {
+		listeners.forEach(function (listener) {
+			listener.call(null, hash);
+		});
+	};
+
 class Router extends React.Component {
 	static propTypes = {
 		"default": React.PropTypes.string.isRequired,
@@ -66,6 +73,7 @@ class Router extends React.Component {
 					current: hash,
 					route: getRouteFromTable(hash, this.props.routes, this.props.notfound)
 				});
+				notifyListeners(_listeners, hash);
 			}
 		}, 10);
 		
@@ -76,12 +84,30 @@ class Router extends React.Component {
 		clearInterval(this._intervalId);
 	}
 	
+	addRouteChangeListener(fn) {
+		_listeners.push(fn);
+	}
+	
+	removeRouteChangeListener(fn) {
+		let index = -1;
+		_listeners.forEach(function (listener, i) {
+			if (listener === fn) {
+				index = i;
+			}
+		});
+		
+		if (index >= 0) {
+			_listeners.splice(index, 1);
+		}
+	}
+	
 	setRoute(route) {
 		window.location.hash = route;
 		this.setState({
 			current: route,
 			route: getRouteFromTable(route, this.props.routes, this.props.notfound)
 		});
+		notifyListeners(_listeners, route);
 	}
 	
 	render() {

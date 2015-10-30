@@ -67,6 +67,13 @@ var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 	return _react2['default'].createElement(notfound, { route: hash });
 };
 
+var _listeners = [],
+    notifyListeners = function notifyListeners(listeners, hash) {
+	listeners.forEach(function (listener) {
+		listener.call(null, hash);
+	});
+};
+
 var Router = (function (_React$Component) {
 	_inherits(Router, _React$Component);
 
@@ -102,6 +109,7 @@ var Router = (function (_React$Component) {
 						current: hash,
 						route: getRouteFromTable(hash, _this.props.routes, _this.props.notfound)
 					});
+					notifyListeners(_listeners, hash);
 				}
 			}, 10);
 
@@ -113,6 +121,25 @@ var Router = (function (_React$Component) {
 			clearInterval(this._intervalId);
 		}
 	}, {
+		key: 'addRouteChangeListener',
+		value: function addRouteChangeListener(fn) {
+			_listeners.push(fn);
+		}
+	}, {
+		key: 'removeRouteChangeListener',
+		value: function removeRouteChangeListener(fn) {
+			var index = -1;
+			_listeners.forEach(function (listener, i) {
+				if (listener === fn) {
+					index = i;
+				}
+			});
+
+			if (index >= 0) {
+				_listeners.splice(index, 1);
+			}
+		}
+	}, {
 		key: 'setRoute',
 		value: function setRoute(route) {
 			window.location.hash = route;
@@ -120,6 +147,7 @@ var Router = (function (_React$Component) {
 				current: route,
 				route: getRouteFromTable(route, this.props.routes, this.props.notfound)
 			});
+			notifyListeners(_listeners, route);
 		}
 	}, {
 		key: 'render',
