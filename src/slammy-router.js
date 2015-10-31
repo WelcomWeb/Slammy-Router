@@ -84,23 +84,6 @@ class Router extends React.Component {
 		clearInterval(this._intervalId);
 	}
 	
-	addRouteChangeListener(fn) {
-		_listeners.push(fn);
-	}
-	
-	removeRouteChangeListener(fn) {
-		let index = -1;
-		_listeners.forEach(function (listener, i) {
-			if (listener === fn) {
-				index = i;
-			}
-		});
-		
-		if (index >= 0) {
-			_listeners.splice(index, 1);
-		}
-	}
-	
 	setRoute(route) {
 		window.location.hash = route;
 		this.setState({
@@ -118,6 +101,23 @@ class Router extends React.Component {
 		
 		return this.state.route;
 		
+	}
+	
+	static addRouteChangeListener(fn) {
+		_listeners.push(fn);
+	}
+	
+	static removeRouteChangeListener(fn) {
+		let index = -1;
+		_listeners.forEach(function (listener, i) {
+			if (listener === fn) {
+				index = i;
+			}
+		});
+		
+		if (index >= 0) {
+			_listeners.splice(index, 1);
+		}
 	}
 };
 

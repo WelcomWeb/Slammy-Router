@@ -116,7 +116,7 @@ describe('Slammy-Router', function () {
 		};
 		spyOn(mock, "callback");
 		
-		reference.addRouteChangeListener(mock.callback);
+		Router.addRouteChangeListener(mock.callback);
 		
 		reference.setRoute("/default");
 		view = TestUtils.findRenderedDOMComponentWithTag(reference, 'div');
@@ -154,9 +154,9 @@ describe('Slammy-Router', function () {
 		spyOn(mock, "callback");
 		
 		reference.addRouteChangeListener(mock.callback);
-		reference.removeRouteChangeListener(mock.callback);
+		Router.removeRouteChangeListener(mock.callback);
 		
-		reference.setRoute("/default");
+		Router.setRoute("/default");
 		view = TestUtils.findRenderedDOMComponentWithTag(reference, 'div');
 		expect(view.textContent).toEqual("default");
 		

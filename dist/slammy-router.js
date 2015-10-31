@@ -121,25 +121,6 @@ var Router = (function (_React$Component) {
 			clearInterval(this._intervalId);
 		}
 	}, {
-		key: 'addRouteChangeListener',
-		value: function addRouteChangeListener(fn) {
-			_listeners.push(fn);
-		}
-	}, {
-		key: 'removeRouteChangeListener',
-		value: function removeRouteChangeListener(fn) {
-			var index = -1;
-			_listeners.forEach(function (listener, i) {
-				if (listener === fn) {
-					index = i;
-				}
-			});
-
-			if (index >= 0) {
-				_listeners.splice(index, 1);
-			}
-		}
-	}, {
 		key: 'setRoute',
 		value: function setRoute(route) {
 			window.location.hash = route;
@@ -158,6 +139,25 @@ var Router = (function (_React$Component) {
 			}
 
 			return this.state.route;
+		}
+	}], [{
+		key: 'addRouteChangeListener',
+		value: function addRouteChangeListener(fn) {
+			_listeners.push(fn);
+		}
+	}, {
+		key: 'removeRouteChangeListener',
+		value: function removeRouteChangeListener(fn) {
+			var index = -1;
+			_listeners.forEach(function (listener, i) {
+				if (listener === fn) {
+					index = i;
+				}
+			});
+
+			if (index >= 0) {
+				_listeners.splice(index, 1);
+			}
 		}
 	}]);
 
