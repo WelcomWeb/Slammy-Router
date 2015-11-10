@@ -22,7 +22,7 @@ let getRouteFromTable = function (hash, routes, notfound) {
 	
 	for (let route in routes) {
 		if (routes.hasOwnProperty(route)) {
-			let variables = route.match(/\:([a-z0-9]+)/ig),
+			let variables = route.match(/\:([a-z0-9]+)/ig) || [],
 				clean = route.replace(/\/\:([a-z0-9]+)/ig, '');
 			
 			if (hash.indexOf(clean) === 0) {
