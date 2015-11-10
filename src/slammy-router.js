@@ -29,11 +29,13 @@ let getRouteFromTable = function (hash, routes, notfound) {
 				let params = hash.substr(clean.length + 1).split('/'),
 					out = {};
 				
-				variables.forEach(function (variable, index) {
-					if (!!params[index]) {
-						out[variable.substr(1)] = params[index];
-					}
-				});
+				if (!!variables && variables.length) {
+					variables.forEach(function (variable, index) {
+						if (!!params[index]) {
+							out[variable.substr(1)] = params[index];
+						}
+					});
+				}
 				
 				return React.createElement(routes[route], { params: out });
 			}

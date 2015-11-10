@@ -40,7 +40,7 @@ var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 
 	for (var route in routes) {
 		if (routes.hasOwnProperty(route)) {
-			var variables = route.match(/\:([a-z0-9]+)/ig),
+			var variables = route.match(/\:([a-z0-9]+)/ig) || [],
 			    clean = route.replace(/\/\:([a-z0-9]+)/ig, '');
 
 			if (hash.indexOf(clean) === 0) {
@@ -48,11 +48,13 @@ var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 					var params = hash.substr(clean.length + 1).split('/'),
 					    out = {};
 
-					variables.forEach(function (variable, index) {
-						if (!!params[index]) {
-							out[variable.substr(1)] = params[index];
-						}
-					});
+					if (!!variables && variables.length) {
+						variables.forEach(function (variable, index) {
+							if (!!params[index]) {
+								out[variable.substr(1)] = params[index];
+							}
+						});
+					}
 
 					return {
 						v: _react2['default'].createElement(routes[route], { params: out })
