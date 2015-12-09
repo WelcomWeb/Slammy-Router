@@ -5,7 +5,7 @@
 *
 * @author Björn Wikström <bjorn@welcom.se>
 * @license Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0.html>
-* @version 2.0
+* @version 2.1
 * @copyright Welcom Web i Göteborg AB 2015
 */
 import React from 'react';
@@ -46,6 +46,7 @@ let getRouteFromTable = function (hash, routes, notfound) {
 };
 
 let _listeners = [],
+	_routes = {},
 	notifyListeners = function (listeners, hash) {
 		listeners.forEach(function (listener) {
 			listener.call(null, hash);
@@ -62,7 +63,12 @@ class Router extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 		
+		_routes = props.routes;
 		this.state = { current: null, route: null };
+	}
+
+	componentWillReceiveProps(nextProps) {
+		_routes = !!nextProps.routes ? nextProps.routes : _routes;
 	}
 	
 	componentDidMount() {
@@ -73,7 +79,7 @@ class Router extends React.Component {
 			if (hash != this.state.current) {
 				this.setState({
 					current: hash,
-					route: getRouteFromTable(hash, this.props.routes, this.props.notfound)
+					route: getRouteFromTable(hash, _routes, this.props.notfound)
 				});
 				notifyListeners(_listeners, hash);
 			}
@@ -90,7 +96,7 @@ class Router extends React.Component {
 		window.location.hash = route;
 		this.setState({
 			current: route,
-			route: getRouteFromTable(route, this.props.routes, this.props.notfound)
+			route: getRouteFromTable(route, _routes, this.props.notfound)
 		});
 		notifyListeners(_listeners, route);
 	}
@@ -103,6 +109,14 @@ class Router extends React.Component {
 		
 		return this.state.route;
 		
+	}
+
+	static addRoute(path, route) {
+		_routes[path] = route;
+	}
+
+	static removeRoute(path) {
+		delete _routes[path];
 	}
 	
 	static addRouteChangeListener(fn) {

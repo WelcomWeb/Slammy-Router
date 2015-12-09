@@ -5,7 +5,7 @@
 *
 * @author Björn Wikström <bjorn@welcom.se>
 * @license Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0.html>
-* @version 2.0
+* @version 2.1
 * @copyright Welcom Web i Göteborg AB 2015
 */
 'use strict';
@@ -70,6 +70,7 @@ var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 };
 
 var _listeners = [],
+    _routes = {},
     notifyListeners = function notifyListeners(listeners, hash) {
 	listeners.forEach(function (listener) {
 		listener.call(null, hash);
@@ -94,10 +95,16 @@ var Router = (function (_React$Component) {
 
 		_get(Object.getPrototypeOf(Router.prototype), 'constructor', this).call(this, props, context);
 
+		_routes = props.routes;
 		this.state = { current: null, route: null };
 	}
 
 	_createClass(Router, [{
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			_routes = !!nextProps.routes ? nextProps.routes : _routes;
+		}
+	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			var _this = this;
@@ -109,7 +116,7 @@ var Router = (function (_React$Component) {
 				if (hash != _this.state.current) {
 					_this.setState({
 						current: hash,
-						route: getRouteFromTable(hash, _this.props.routes, _this.props.notfound)
+						route: getRouteFromTable(hash, _routes, _this.props.notfound)
 					});
 					notifyListeners(_listeners, hash);
 				}
@@ -128,7 +135,7 @@ var Router = (function (_React$Component) {
 			window.location.hash = route;
 			this.setState({
 				current: route,
-				route: getRouteFromTable(route, this.props.routes, this.props.notfound)
+				route: getRouteFromTable(route, _routes, this.props.notfound)
 			});
 			notifyListeners(_listeners, route);
 		}
@@ -143,6 +150,16 @@ var Router = (function (_React$Component) {
 			return this.state.route;
 		}
 	}], [{
+		key: 'addRoute',
+		value: function addRoute(path, route) {
+			_routes[path] = route;
+		}
+	}, {
+		key: 'removeRoute',
+		value: function removeRoute(path) {
+			delete _routes[path];
+		}
+	}, {
 		key: 'addRouteChangeListener',
 		value: function addRouteChangeListener(fn) {
 			_listeners.push(fn);
