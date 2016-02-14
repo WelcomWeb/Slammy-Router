@@ -1,32 +1,34 @@
-/**
-* Slammy-Router
-*
-* A small and easy-to-use router for React
-*
-* @author Björn Wikström <bjorn@welcom.se>
-* @license Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0.html>
-* @version 2.1
-* @copyright Welcom Web i Göteborg AB 2015
-*/
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
+                                                                                                                                                                                                                                                  * Slammy-Router
+                                                                                                                                                                                                                                                  *
+                                                                                                                                                                                                                                                  * A small and easy-to-use router for React
+                                                                                                                                                                                                                                                  *
+                                                                                                                                                                                                                                                  * @author Björn Wikström <bjorn@welcom.se>
+                                                                                                                                                                                                                                                  * @license Apache License 2.0 <https://www.apache.org/licenses/LICENSE-2.0.html>
+                                                                                                                                                                                                                                                  * @version 2.1
+                                                                                                                                                                                                                                                  * @copyright Welcom Web i Göteborg AB 2015
+                                                                                                                                                                                                                                                  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var getCleanHash = function getCleanHash(hash) {
 	hash = hash || window.location.hash;
@@ -35,7 +37,7 @@ var getCleanHash = function getCleanHash(hash) {
 
 var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 	if (!!routes[hash]) {
-		return _react2['default'].createElement(routes[hash]);
+		return _react2.default.createElement(routes[hash]);
 	}
 
 	for (var route in routes) {
@@ -44,7 +46,7 @@ var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 			    clean = route.replace(/\/\:([a-z0-9]+)/ig, '');
 
 			if (hash.indexOf(clean) === 0) {
-				var _ret = (function () {
+				var _ret = function () {
 					var params = hash.substr(clean.length + 1).split('/'),
 					    out = {};
 
@@ -57,16 +59,16 @@ var getRouteFromTable = function getRouteFromTable(hash, routes, notfound) {
 					}
 
 					return {
-						v: _react2['default'].createElement(routes[route], { params: out })
+						v: _react2.default.createElement(routes[route], { params: out })
 					};
-				})();
+				}();
 
-				if (typeof _ret === 'object') return _ret.v;
+				if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 			}
 		}
 	}
 
-	return _react2['default'].createElement(notfound, { route: hash });
+	return _react2.default.createElement(notfound, { route: hash });
 };
 
 var _listeners = [],
@@ -77,26 +79,17 @@ var _listeners = [],
 	});
 };
 
-var Router = (function (_React$Component) {
+var Router = function (_React$Component) {
 	_inherits(Router, _React$Component);
-
-	_createClass(Router, null, [{
-		key: 'propTypes',
-		value: {
-			"default": _react2['default'].PropTypes.string.isRequired,
-			"notfound": _react2['default'].PropTypes.func.isRequired,
-			"routes": _react2['default'].PropTypes.object.isRequired
-		},
-		enumerable: true
-	}]);
 
 	function Router(props, context) {
 		_classCallCheck(this, Router);
 
-		_get(Object.getPrototypeOf(Router.prototype), 'constructor', this).call(this, props, context);
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Router).call(this, props, context));
 
 		_routes = props.routes;
-		this.state = { current: null, route: null };
+		_this.state = { current: null, route: null };
+		return _this;
 	}
 
 	_createClass(Router, [{
@@ -107,22 +100,22 @@ var Router = (function (_React$Component) {
 	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			var _this = this;
+			var _this2 = this;
 
 			var hash = getCleanHash();
 
 			this._intervalId = setInterval(function () {
 				var hash = getCleanHash();
-				if (hash != _this.state.current) {
-					_this.setState({
+				if (hash != _this2.state.current) {
+					_this2.setState({
 						current: hash,
-						route: getRouteFromTable(hash, _routes, _this.props.notfound)
+						route: getRouteFromTable(hash, _routes, _this2.props.notfound)
 					});
 					notifyListeners(_listeners, hash);
 				}
 			}, 10);
 
-			window.location.hash = !!hash.replace('/', '') ? hash : getCleanHash(this.props['default']);
+			window.location.hash = !!hash.replace('/', '') ? hash : getCleanHash(this.props.default);
 		}
 	}, {
 		key: 'componentWillUnmount',
@@ -181,9 +174,13 @@ var Router = (function (_React$Component) {
 	}]);
 
 	return Router;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
+Router.propTypes = {
+	"default": _react2.default.PropTypes.string.isRequired,
+	"notfound": _react2.default.PropTypes.func.isRequired,
+	"routes": _react2.default.PropTypes.object.isRequired
+};
 ;
 
-exports['default'] = Router;
-module.exports = exports['default'];
+exports.default = Router;

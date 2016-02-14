@@ -14,7 +14,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -24,7 +24,7 @@ describe('Slammy-Router', function () {
 				})
 		};
 		
-		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var reference = ReactDOM.render(<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />, node);
 		reference.setRoute("/default");
 		
 		var view = TestUtils.findRenderedDOMComponentWithTag(reference, 'div');
@@ -35,7 +35,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -50,7 +50,7 @@ describe('Slammy-Router', function () {
 				})
 		};
 		
-		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var reference = ReactDOM.render(<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />, node);
 		var view;
 		
 		reference.setRoute("/default");
@@ -66,7 +66,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -93,7 +93,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -108,7 +108,7 @@ describe('Slammy-Router', function () {
 				})
 		};
 		
-		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var reference = ReactDOM.render(<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />, node);
 		var view;
 		
 		var mock = {
@@ -130,7 +130,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -145,7 +145,7 @@ describe('Slammy-Router', function () {
 				})
 		};
 		
-		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var reference = ReactDOM.render(<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />, node);
 		var view;
 		
 		var mock = {
@@ -168,7 +168,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -178,7 +178,7 @@ describe('Slammy-Router', function () {
 				})
 		};
 		
-		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />), node);
+		var reference = ReactDOM.render(<Router default="/default" routes={routes} notfound={jest.genMockFunction()} />, node);
 		var view;
 		
 		var mock = {
@@ -207,7 +207,7 @@ describe('Slammy-Router', function () {
 		var TestUtils = require('react-addons-test-utils'),
 			React = require('react'),
 			ReactDOM = require('react-dom'),
-			Router = require('../src/slammy-router');
+			Router = require('../src/slammy-router').default;
 		
 		var routes = {
 			"/default": React.createClass({
@@ -228,7 +228,7 @@ describe('Slammy-Router', function () {
 			}
 		});
 		
-		var reference = ReactDOM.render((<Router default="/default" routes={routes} notfound={notFoundRoute} />), node);
+		var reference = ReactDOM.render(<Router default="/default" routes={routes} notfound={notFoundRoute} />, node);
 		
 		Router.removeRoute("/test-route");
 
